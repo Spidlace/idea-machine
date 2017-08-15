@@ -1,0 +1,20 @@
+am_idea_machine_home:
+    path:      /
+    defaults: { _controller: AMIdeaMachineBundle:Idea:index }
+
+am_platform_view:
+    path:      /view/{id}
+    defaults: { _controller: AMIdeaMachineBundle:Idea:view }
+    requirements: { id: \d+ }
+
+am_platform_add:
+    path:      /add
+    defaults: { _controller: AMIdeaMachineBundle:Idea:add }
+
+am_platform_edit:
+    path:      /edit/{id}
+    defaults: { _controller: AMIdeaMachineBundle:Idea:edit }
+
+am_platform_delete:
+    path:      /delete
+    defaults: { _controller: AMIdeaMachineBundle:Idea:delete }

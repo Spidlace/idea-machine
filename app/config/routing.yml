@@ -1,0 +1,3 @@
+am_idea_machine:
+    resource: "@AMIdeaMachineBundle/Resources/config/routing.yml"
+    prefix:   /idea
