@@ -20,7 +20,6 @@ class IdeaType extends AbstractType
     {
         $builder
         ->add('title',      TextType::class)
-        ->add('author',     TextType::class)
         ->add('content',    TextareaType::class)
         ->add('image',      ImageType::class)
         ->add('save',       SubmitType::class);

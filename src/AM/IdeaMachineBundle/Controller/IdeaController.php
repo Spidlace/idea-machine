@@ -6,6 +6,7 @@ namespace AM\IdeaMachineBundle\Controller;
 
 use AM\IdeaMachineBundle\Entity\Idea;
 use AM\IdeaMachineBundle\Entity\Image;
+use AM\UserBundle\Entity\User;
 use AM\IdeaMachineBundle\Form\IdeaType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -86,6 +87,10 @@ class IdeaController extends Controller
         // $image->setAlt('Logo de Symfony');
 
         if($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+
+            $user = $this->getUser();
+            $idea->setUser($user);
+
             // On enregistre notre objet $idea dans la base de données
             $em = $this->getDoctrine()->getManager();
             $em->persist($idea);
@@ -116,7 +121,10 @@ class IdeaController extends Controller
         // Je récupère l'entité correspondante à $id
         $idea = $repository->findOneBy(array('slug' => $slug));
 
-        if(null === $idea){
+        if($idea->getUser()->getID() != $this->getUser()->getId()){
+            throw new AccessDeniedException("Vous n'avez pas l'autorisation d'éditer cette idée.");
+            return $this->redirectToRoute('am_platform_view', array('slug' => $slug));
+        } elseif(null === $idea){
             throw new NotFoundHttpException("L'idée avec le slug : ".$slug." n'existe pas.");
             return $this->redirectToRoute('am_idea_machine_home');
         }
@@ -155,11 +163,14 @@ class IdeaController extends Controller
         // Je récupère l'entité correspondante à $id
         $idea = $repository->findOneBy(array('slug' => $slug));
 
-        if(null === $idea){
+        if($idea->getUser()->getID() != $this->getUser()->getId()){
+            throw new AccessDeniedException("Vous n'avez pas l'autorisation de supprimer cette idée.");
+            return $this->redirectToRoute('am_platform_view', array('slug' => $slug));
+        } elseif(null === $idea){
             throw new NotFoundHttpException("L'idée avec le slug : ".$slug." n'existe pas.");
             return $this->redirectToRoute('am_platform_view', array($slug => $idea->getSlug()));
         }
-
+        
         // On crée un formulaire vide, qui ne contiendra que le champ CSRF
         // Cela permet de protéger la suppression d'annonce contre cette faille
         $form = $this->get('form.factory')->create();

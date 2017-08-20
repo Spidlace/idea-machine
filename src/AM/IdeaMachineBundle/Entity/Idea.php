@@ -46,14 +46,6 @@ class Idea
     /**
      * @var string
      *
-     * @ORM\Column(name="author", type="string", length=255)
-     * @Assert\Length(min=2)
-     */
-    private $author;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="content", type="text")
      * @Antiflood()
      * @Assert\NotBlank()
@@ -76,6 +68,12 @@ class Idea
         * @ORM\Column(name="slug", type="string", length=255, unique=true)
     */
     private $slug;
+
+    /**
+     * @ORM\OneToOne(targetEntity="AM\UserBundle\Entity\User", cascade={"persist"})
+     * @Assert\Valid()
+    */
+    private $user;
 
     public function __construct()
     {
@@ -139,30 +137,6 @@ class Idea
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Idea
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 
     /**
@@ -272,5 +246,29 @@ class Idea
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AM\userBundle\Entity\User $user
+     *
+     * @return Idea
+     */
+    public function setUser(\AM\userBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AM\userBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

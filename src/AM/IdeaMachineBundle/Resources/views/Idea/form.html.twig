@@ -37,8 +37,6 @@
 		{{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
 	</div>
 
-	{{ form_row(form.author) }}
-
 	{# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
 	{{ form_widget(form.save, {'attr': {'class': 'btn btn-valider'}, 'label': 'Valider'}) }}
 

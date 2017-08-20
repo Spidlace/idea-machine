@@ -31,12 +31,14 @@
         	<p>créé le {{ idea.date|date('d/m/Y') }}</p>
         </div>
         <div class="author">
-        	<p>par {{ idea.author }}</p>
+        	<p>par {{ idea.user.username }}</p>
         </div>
-        <div class="parameters-idea">
-            <a href="{{ path('am_platform_edit', {'slug': idea.slug}) }}" class="btn btn-edit">Editer</a>
-        	<a href="{{ path('am_platform_delete', {'slug': idea.slug}) }}" class="btn btn-delete">Supprimer</a>
-        </div>
+        {% if app.user is not null and app.user.username == idea.user.username %}
+            <div class="parameters-idea">
+                <a href="{{ path('am_platform_edit', {'slug': idea.slug}) }}" class="btn btn-edit">Editer</a>
+            	<a href="{{ path('am_platform_delete', {'slug': idea.slug}) }}" class="btn btn-delete">Supprimer</a>
+            </div>
+        {% endif %}
     </div>
 
     {{ include("AMIdeaMachineBundle:Idea:menuConnectOrAuteur.html.twig") }}
