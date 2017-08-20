@@ -213,6 +213,7 @@ p {
 }
 
 .btn,
+a.afficher-la-suite,
 input[type=submit] {
   background: #ffd34e;
   text-decoration: none;
@@ -240,6 +241,7 @@ input[type=submit] {
 }
 
 .btn:hover,
+a.afficher-la-suite:hover,
 input[type=submit]:hover {
   background: transparent;
   color: #ffd34e;
@@ -429,7 +431,7 @@ footer ul li a:hover {
   position: relative;
 }
 
-.list-idea ul li:nth-child(4n+1) {
+.list-idea ul li:nth-child(3n+1) {
   margin-left: 0;
 }
 
@@ -508,6 +510,13 @@ footer ul li a:hover {
 
 .list-idea ul li .editdelete-idea a:hover {
   text-decoration: underline;
+}
+
+.list-idea a.afficher-la-suite {
+  float: none;
+  margin: 30px auto 0;
+  text-align: center;
+  width: 190px;
 }
 
 .parameters-idea {

@@ -33,7 +33,7 @@
         <div class="author">
         	<p>par {{ idea.user.username }}</p>
         </div>
-        {% if app.user is not null and app.user.username == idea.user.username %}
+        {% if app.user is not null and app.user.id == idea.user.id %}
             <div class="parameters-idea">
                 <a href="{{ path('am_platform_edit', {'slug': idea.slug}) }}" class="btn btn-edit">Editer</a>
             	<a href="{{ path('am_platform_delete', {'slug': idea.slug}) }}" class="btn btn-delete">Supprimer</a>

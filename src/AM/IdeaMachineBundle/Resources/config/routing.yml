@@ -22,5 +22,9 @@ am_platform_mine:
     path:     /idea/mine
     defaults: { _controller: AMIdeaMachineBundle:Idea:mine }
 
+am_platform_get_other_idea:
+    path:     /idea/other-idea
+    defaults: { _controller: AMIdeaMachineBundle:Idea:getOtherIdea }
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

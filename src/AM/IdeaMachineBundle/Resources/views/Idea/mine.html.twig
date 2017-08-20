@@ -4,6 +4,15 @@
 
 {% block title %}{{ parent() }}{% endblock %}
 
+{% block javascripts_var %}
+var am_platform_get_other_idea = "{{ path('am_platform_get_other_idea') }}";
+var id_user = {{ app.user.id }};
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('js/ajax-listIdea.js') }}" type="text/javascript"></script>
+{% endblock %}
+
 {% block am_idea_machine_body %}
     
     {{ include("AMIdeaMachineBundle:Idea:listIdeas.html.twig") }}

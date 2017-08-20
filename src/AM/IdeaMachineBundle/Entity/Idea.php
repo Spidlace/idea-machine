@@ -70,8 +70,7 @@ class Idea
     private $slug;
 
     /**
-     * @ORM\OneToOne(targetEntity="AM\UserBundle\Entity\User", cascade={"persist"})
-     * @Assert\Valid()
+     * @ORM\ManyToOne(targetEntity="AM\UserBundle\Entity\User")
     */
     private $user;
 

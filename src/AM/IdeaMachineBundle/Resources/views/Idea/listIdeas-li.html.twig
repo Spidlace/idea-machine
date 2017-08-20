@@ -1,0 +1,21 @@
+{% for idea in listIdeas %}
+    <li>
+        <a href="{{ path('am_platform_view', {'slug': idea.slug}) }}">
+            {% if idea.image is not null %}
+                <div class="image-idea">
+                    <img src="{{ asset(idea.image.webPath) }}" alt="{{ idea.image.alt }}">
+                </div>
+            {% endif %}
+            <span class="title-idea">{{ idea.title|truncate(20, false, '...') }}</span>
+            <span class="resume-idea">{{ idea.content|truncate(100, false, '...') }}</span>
+        </a>
+        {% if app.user is not null and app.user.username == idea.user.username %}
+            <div class="editdelete-idea">
+                <a href="{{ path('am_platform_edit', {'slug': idea.slug}) }}" class="edit">Editer</a>
+                <a href="{{ path('am_platform_delete', {'slug': idea.slug}) }}" class="delete">Supprimer</a>
+            </div>
+        {% endif %}
+    </li>
+{% else %}
+    <li class="idea-none">Aucune idées d'enregistrées</li>
+{% endfor %}

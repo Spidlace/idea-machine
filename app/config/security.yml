@@ -29,12 +29,12 @@ security:
                 login_path:                      fos_user_security_login
                 check_path:                      fos_user_security_check
                 always_use_default_target_path : true
-                default_target_path:             /idea
+                default_target_path:             /
                 use_referer :                    true
-                failure_path:                    /idea
+                failure_path:                    /
             logout:
                 path:   fos_user_security_logout
-                target: /idea
+                target: /
 
     access_control:
     #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

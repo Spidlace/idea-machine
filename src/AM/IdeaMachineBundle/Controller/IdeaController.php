@@ -27,8 +27,10 @@ class IdeaController extends Controller
             throw new NotFoundHttpException("Aucunes idées éxistantes.");
         }
 
+        $count = $em->getRepository('AMIdeaMachineBundle:Idea')->getCountAjax();
+
         return $this->render('AMIdeaMachineBundle:Idea:index.html.twig', 
-            array('listIdeas' => $listIdeas)
+            array('listIdeas' => $listIdeas, 'count' => $count)
         );
     }
 
@@ -206,8 +208,34 @@ class IdeaController extends Controller
             throw new NotFoundHttpException("Aucunes idées éxistantes.");
         }
 
+        $count = $em->getRepository('AMIdeaMachineBundle:Idea')->getCountAjax($this->getUser()->getId());
+
         return $this->render('AMIdeaMachineBundle:Idea:mine.html.twig', 
-            array('listIdeas' => $listIdeas)
+            array('listIdeas' => $listIdeas, 'count' => $count)
         );
+    }
+
+    public function getOtherIdeaAction(Request $request)
+    {   
+
+        if($request->isXmlHttpRequest())
+        {
+            $page = $request->request->get('page');
+            $page_max = $request->request->get('page_max');
+            $user_id = $request->request->get('user_id');
+            if(empty($user_id)) $user_id = null;
+
+            if(isset($page) && $page <= $page_max){
+                $offset = $page*6;
+
+                $em = $this->getDoctrine()->getManager();
+                $listIdeas = $em->getRepository('AMIdeaMachineBundle:Idea')->getOtherIdea($offset, $user_id);
+
+                return $this->render('AMIdeaMachineBundle:Idea:listIdeas-li.html.twig', 
+                    array('listIdeas' => $listIdeas)
+                );
+            }
+        }
+        throw new NotFoundHttpException("Aucunes idées éxistantes.");
     }
 }
