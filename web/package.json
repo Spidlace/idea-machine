@@ -1,0 +1,22 @@
+{
+  "name": "idea_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-load-plugins": "latest",
+    "gulp-rename": "latest",
+    "gulp-csso": "latest",
+    "gulp-sass": "latest",
+    "run-sequence": "latest",
+    "gulp-livereload": "latest",
+    "gulp-cssbeautify": "latest",
+    "gulp-autoprefixer": "latest"
+  },
+  "author": "Anthony Martin",
+  "license": "ISC"
+}

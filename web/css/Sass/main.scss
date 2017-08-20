@@ -1,0 +1,171 @@
+@charset "utf-8";
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+
+html {line-height:1;}
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, textarea, select, input, button, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {margin: 0;padding: 0;border: 0;outline: 0;font-weight: inherit;font-style: inherit;vertical-align: baseline}
+textarea {overflow: auto;vertical-align: top;}
+ol, ul {list-style:none;}
+table {border-collapse:collapse;border-spacing:0;}
+caption, th, td {text-align:left;font-weight:normal;vertical-align:middle;}
+q {quotes:none;}
+q:before, q:after {content:"";content:none;}
+a img {border:none;}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {display:block;}
+sup {vertical-align:super;font-size:smaller;}
+sub {vertical-align:sub;font-size:smaller;}
+em {font-style:italic;}
+strong {font-weight:bold;}
+
+body {font-family:"Roboto", sans-serif;font-size:15px;line-height:18px;background:#fff;color:#191919;overflow-x:hidden;position:inherit!important;}
+kbd {padding:3px 5px;margin-left:5px;margin-right:5px;border:1px solid #E2F572;border:none;background:#363636;color:#FFF;font-size:11px;font-weight:bold;}
+video {width:100%!important;height:auto!important;}
+
+
+
+/*Prise en charge de HTML 5 - Définit les nouvelles balises HTML 5 sur display:block afin que les navigateurs sachent comment effectuer un rendu correct des balises. */
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {display: block;margin:0;padding:0}
+
+a:focus, a:active, a:hover {outline: 0}
+
+ol, ul { list-style: none;color:#444}
+table { border-collapse: separate; border-spacing: 0}
+caption, th, td { text-align: left; font-weight: normal}
+
+h1,h2,h3,h4,h5,h6 {font-weight: normal}
+p {margin:0 0 5px;}
+.bold, strong {font-weight:bold}
+.italic, em {font-style:italic}
+.float_left, .fleft{float: left}
+.float_right, .fright{float: right}
+.imgleft {margin-right: 10px}
+.imgright {margin-left: 10px}
+.text_align_right {text-align:right;}
+.text_align_left {text-align:left;}
+.text_align_center {text-align:center;}
+.text_align_justify {text-align:justify;}
+.clr {clear:both}
+.clearfix {float:none;clear:both}
+.none, .hidden, .hide {display:none;}
+.block, .show {display:block;}
+.inline {display:inline;}
+.relative, .position_relative {position:relative}
+.absolute, .position_absolute {position:absolute}
+.maj {text-transform:uppercase;}
+.btn,
+input[type=submit] {background:#ffd34e;text-decoration:none;border:1px solid #ffd34e;border-radius:3px;height:34px;box-sizing:border-box;font-size:14px;display:block;float:right;padding:8px 15px;color:#fff;font-weight:bold;text-transform:uppercase;transition:0.3s ease-in-out;cursor:pointer;}
+.btn-delete {margin:0 0 0 10px!important;background:#bd4932!important;border:1px solid #bd4932!important;}
+.btn:hover,
+input[type=submit]:hover {background:transparent;color:#ffd34e;}
+.btn-delete:hover {background:transparent!important;color:#bd4932!important;}
+input[type=text],
+input[type=password],
+textarea {border:1px solid #ececec;width:100%;box-sizing:border-box;padding:5px;height:30px;border-radius:3px;font-family:"Roboto", sans-serif;}
+textarea {height:150px;resize:vertical;}
+
+// Tools
+.wrap {width:1260px;margin:0 auto;position:relative;}
+.w50 {width:49%;}
+.fright {float:right;}
+::-webkit-input-placeholder {font-family:"Roboto", sans-serif;color:#a7a7a7;font-size:14px;}
+:-moz-placeholder {font-family:"Roboto", sans-serif;color:#a7a7a7;font-size:14px;}
+::-moz-placeholder {font-family:"Roboto", sans-serif;color:#a7a7a7;font-size:14px;}
+:-ms-input-placeholder {font-family:"Roboto", sans-serif;color:#a7a7a7;font-size:14px;}
+
+// ---------------- //
+// 		HEADER 		//
+// ---------------- //
+header {padding:15px 0;margin:0 0 30px;}
+header a.logo {display:block;text-decoration:none;background:url('../images./logo.png') no-repeat left top;width:320px;height:88px;margin:0 auto;transition:0.5s;opacity:1;}
+header a.logo h1 {display:none;}
+header a.logo:hover {opacity:0.7;}
+
+// ---------------- //
+// 		WRAPPER		//
+// ---------------- //
+#wrapper {position:relative;margin:0 0 60px;}
+#wrapper .container-border {background:#fffad5;padding:20px;position:relative;width:85%;}
+
+// ---------------- //
+// 		FOOTER 		//
+// ---------------- //
+footer {background:#3d4045;position:relative;padding:10px 0;}
+footer ul {display:flex;flex-direction:row;flex-wrap:wrap;width:100%;align-items:center;justify-content:center;}
+footer ul li {margin:0 0 0 20px;}
+footer ul li:before {content:"|";color:#fff;font-size:14px;display:inline-block;margin:0 15px 0 0;vertical-align:middle;}
+footer ul li:first-child {margin:0}
+footer ul li:first-child:before {display:none;}
+footer ul li a {display:inline-block;text-decoration:none;color:#fff;font-size:14px;vertical-align:middle;}
+footer ul li a:hover {text-decoration:underline;}
+
+// ---------------- //
+// 		HOME		//
+// ---------------- //
+.list-idea {}
+.list-idea ul {width:100%;display:flex;flex-flow:row wrap;justify-content:space-between;}
+.list-idea ul:after {content:"";flex:auto;}
+.list-idea ul li {width:32%;margin:0 0 20px 2%;height:310px;}
+.list-idea ul li:nth-child(4n+1) {margin-left:0}
+.list-idea ul li a {display:block;text-decoration:none;padding:15px;border:1px solid #e6e6e6;height:100%;box-sizing:border-box;background:#fff;}
+.list-idea ul li a .image-idea {position:relative;overflow:hidden;width:100%;height:160px;}
+.list-idea ul li a .image-idea img {position:absolute;width:auto;height:auto;left:50%;top:50%;transform:translate(-50%,-50%);width:100%;min-height:100%;transition:transform .6s ease;}
+.list-idea ul li a .title-idea {font-size:18px;color:#105B63;margin:25px 0;width:90%;display:inline-block;vertical-align:middle;display:block;}
+.list-idea ul li a .resume-idea {color:#191919;font-size:14px;}
+.list-idea ul li a:hover .image-idea img {transform:translate(-50%,-50%) scale(1.05);}
+
+// ---------------- //
+// 		GENERAL		//
+// ---------------- //
+.parameters-idea {font-size:0;text-align:right;margin:20px 0 0;}
+.parameters-idea a,
+.parameters-idea input[type=submit] {text-decoration:none;float:none;display:inline-block;vertical-align:middle;}
+
+// ---------------- //
+// 		FORM		//
+// ---------------- //
+#wrapper .container-border .formulaire-add-edit-idea {}
+#wrapper .container-border .formulaire-add-edit-idea .field {margin:0 0 15px;}
+#wrapper .container-border .formulaire-add-edit-idea .field label {display:block;font-size:16px;font-weight:bold;line-height:1.6em;margin:0 0 5px;}
+#wrapper .container-border .formulaire-add-edit-idea .field .control-control label {display:none;}
+
+// ------------------------ //
+// 		MENU CONNECT		//
+// ------------------------ //
+.menu-right-co {position:absolute;top:0;width:15%;right:-15%;z-index:1;}
+.menu-right-co ul {}
+.menu-right-co ul li {margin:0 0 5px;}
+.menu-right-co ul li a,
+.menu-right-co ul li span {background:#ffd34e;display:block;text-decoration:none;padding:5px 10px;color:#fff;font-size:13px;text-transform:uppercase;cursor:pointer;transition:0.2s ease-in-out;}
+.menu-right-co ul li a:hover,
+.menu-right-co ul li span:hover {background:#db9e36;}
+.menu-right-co .connect-wrapper ul li {margin:0}
+.menu-right-co .connect-wrapper form {padding:0 10px 20px;display:none;border:1px solid #ffd34e;background:#fff;}
+.menu-right-co .connect-wrapper form input,
+.menu-right-co .connect-wrapper form textarea {margin:0 0 5px;}
+.menu-right-co .connect-wrapper form input[type=submit] {margin:20px 0 0;}
+
+// ---------------- //
+// 		VIEW		//
+// ---------------- //
+.item-idea .image-idea {position:relative;overflow:hidden;width:100%;height:300px;}
+.item-idea .image-idea img {position:absolute;width:auto;height:auto;left:50%;top:50%;transform:translate(-50%,-50%);width:100%;min-height:100%;}
+.item-idea .top-publication {font-size:0;}
+.item-idea h2 {font-size:20px;color:#105B63;margin:25px 0;width:90%;display:inline-block;vertical-align:middle;}
+.item-idea .vote-idea {width:10%;display:inline-block;vertical-align:middle;font-size:12px;text-align:right;}
+.item-idea .content {margin:0 0 20px;}
+.item-idea .date,
+.item-idea .author {text-align:right;color:#909090;font-size:12px;}
+.item-idea .date p,
+.item-idea .author p {margin:0;}
+
+// ---------------- //
+// 		DELETE		//
+// ---------------- //

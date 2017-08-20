@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class IdeaController extends Controller
 {
@@ -66,11 +66,13 @@ class IdeaController extends Controller
         );
     }
 
-    /**
-     * @Security("has_role('ROLE_AUTEUR')")
-     */
     public function addAction(Request $request)
     {
+
+        // Si l'utilisateur n'a pas l'autorisation d'accéder à cette view
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_AUTEUR')) {
+            return $this->redirectToRoute('am_idea_machine_home');
+        }
 
         // On créé l'objet "Idea"
         $idea = new Idea();
@@ -100,11 +102,13 @@ class IdeaController extends Controller
         ));
     }
 
-    /**
-     * @Security("has_role('ROLE_AUTEUR')")
-     */
     public function editAction($slug, Request $request)
-    {
+    {   
+        // Si l'utilisateur n'a pas l'autorisation d'accéder à cette view
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_AUTEUR')) {
+            return $this->redirectToRoute('am_idea_machine_home');
+        }
+
         // On récupère le repositery
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('AMIdeaMachineBundle:Idea');
@@ -136,11 +140,13 @@ class IdeaController extends Controller
         ));
     }
 
-    /**
-     * @Security("has_role('ROLE_AUTEUR')")
-     */
     public function deleteAction($slug, Request $request)
     {
+
+        // Si l'utilisateur n'a pas l'autorisation d'accéder à cette view
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_AUTEUR')) {
+            return $this->redirectToRoute('am_idea_machine_home');
+        }
 
         // On récupère le repositery
         $em = $this->getDoctrine()->getManager();

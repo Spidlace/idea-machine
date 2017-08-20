@@ -12,10 +12,13 @@
                 
             <li>
                 <a href="{{ path('am_platform_view', {'slug': idea.slug}) }}">
-                    <div class="image-idea">
-                    </div>
-                    <span class="title-idea">{{ idea.title }}</span>
-                    <span class="resume-idea">{{ idea.content }}</span>
+                    {% if idea.image is not null %}
+                        <div class="image-idea">
+                            <img src="{{ asset(idea.image.webPath) }}" alt="{{ idea.image.alt }}">
+                        </div>
+                    {% endif %}
+                    <span class="title-idea">{{ idea.title|truncate(20, false, '...') }}</span>
+                    <span class="resume-idea">{{ idea.content|truncate(100, false, '...') }}</span>
                 </a>
             </li>
             {% else %}

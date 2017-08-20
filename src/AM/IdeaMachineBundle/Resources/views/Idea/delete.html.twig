@@ -8,18 +8,18 @@
 
 {% block am_idea_machine_body %}
 
-  <h2>Supprimer une annonce</h2>
-
-  <p>
-    Etes-vous certain de vouloir supprimer l'annonce "{{ idea.title }}" ?
-  </p>
+  <p>Etes-vous certain de vouloir supprimer l'idée "<strong>{{ idea.title }}</strong>" ?</p>
 
   <form action="{{ path('am_platform_delete', {'slug': idea.slug}) }}" method="post">
-    <a href="{{ path('am_platform_view', {'slug': idea.slug}) }}" class="btn-base">Retour à l'annonce</a>
-    <input type="submit" value="Supprimer" class="btn-suppression" />
+    <div class="parameters-idea">
+      <a href="{{ path('am_platform_view', {'slug': idea.slug}) }}" class="btn btn-base">Retour à l'idée</a>
+      <input type="submit" value="Supprimer" class="btn btn-delete" />
+    </div>
     {{ form_rest(form) }}
   </form>
 
   {{ include("AMIdeaMachineBundle:Idea:menuConnectOrAuteur.html.twig") }}
+  
+  <div class="clearfix"></div>
 
 {% endblock %}

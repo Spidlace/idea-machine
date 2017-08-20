@@ -8,6 +8,11 @@
 			<li><a href="{{ path('fos_user_security_logout') }}" title="Se déconnecter">Se déconnecter</a></li>
 		</ul>
 	{% else %}
-		{{ render(controller("FOSUserBundle:Security:LoginBis")) }}
+		<div class="connect-wrapper">
+			<ul>
+				<li><span class="open-connect">Se connecter</span></li>
+			</ul>
+			{{ render(controller("FOSUserBundle:Security:LoginBis")) }}
+		</div>
 	{% endif %}
 </div>

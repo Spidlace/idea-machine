@@ -14,16 +14,18 @@
                 </div>
             {% endif %}
 
-    	<h2>{{ idea.title }}</h2>
-        <div class="vote-idea">
-            {#% if not advert.categories.empty %#}
-                {#% for category in advert.categories %#}
-                {#% endfor %#}
-            {#% endif %#}
-            Il y a {{ nbrVotes }} votes
+        <div class="top-publication">
+    	   <h2>{{ idea.title }}</h2>
+            <div class="vote-idea">
+                {#% if not advert.categories.empty %#}
+                    {#% for category in advert.categories %#}
+                    {#% endfor %#}
+                {#% endif %#}
+                Il y a {{ nbrVotes }} votes
+            </div>
         </div>
         <div class="content">
-        	<p>{{ idea.content }}</p>
+        	<p>{{ idea.content|nl2br }}</p>
         </div>
         <div class="date">
         	<p>créé le {{ idea.date|date('d/m/Y') }}</p>
@@ -32,8 +34,8 @@
         	<p>par {{ idea.author }}</p>
         </div>
         <div class="parameters-idea">
-        	<a href="{{ path('am_platform_delete', {'slug': idea.slug}) }}" class="delete-idea">Supprimer</a>
-        	<a href="{{ path('am_platform_edit', {'slug': idea.slug}) }}" class="edit-idea">Editer</a>
+            <a href="{{ path('am_platform_edit', {'slug': idea.slug}) }}" class="btn btn-edit">Editer</a>
+        	<a href="{{ path('am_platform_delete', {'slug': idea.slug}) }}" class="btn btn-delete">Supprimer</a>
         </div>
     </div>
 
