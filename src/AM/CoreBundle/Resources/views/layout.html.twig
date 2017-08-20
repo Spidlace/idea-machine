@@ -1,0 +1,34 @@
+{# src/AM/CoreBundle/Resources/views/layout.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Idea Machine{% endblock %}</title>
+</head>
+
+<body>
+    <header>
+        <div class="wrap">
+            <a href="{{ path('am_idea_machine_home') }}" class="logo" title="Page d'accueil">Logo d'Idea Machine</a>
+            <h1>Idea Machine !</h1>
+        </div>
+    </header>
+
+    <div id="wrapper">
+        <div class="wrap">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="wrap">
+            {{ render(controller("AMCoreBundle:Core:menuFooter")) }}
+        </div>
+    </footer>
+</body>
+</html>

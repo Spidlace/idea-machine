@@ -1,0 +1,50 @@
+{# src/AM/IdeaMachineBundle/Resources/views/Idea/form.html.twig #}
+
+<div class="formulaire-add-edit-idea">
+	{{ form_start(form, {'attr': {'class': 'form-idea'}}) }}
+
+	{# Les erreurs générales du formulaire. #}
+	{{ form_errors(form) }}
+
+	<div class="field">
+		{# Génération du label. #}
+		{{ form_label(form.title, "Titre", {'label_attr': {'class': 'control-label'}}) }}
+	
+		{# Affichage des erreurs pour ce champ. #}
+		{{ form_errors(form.title) }}
+
+		{# Génération de l'input. #}
+		{{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+	</div>
+
+	<div class="field">
+		{{ form_label(form.image, "Image", {'label_attr': {'class': 'control-label'}}) }}
+		
+		{# Affichage des erreurs pour ce champ. #}
+		{{ form_errors(form.image) }}
+		
+		{# Génération du textarea. #}
+		{{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+	</div>
+
+	<div class="field">
+		{{ form_label(form.content, "Description", {'label_attr': {'class': 'control-label'}}) }}
+		
+		{# Affichage des erreurs pour ce champ. #}
+		{{ form_errors(form.content) }}
+		
+		{# Génération du textarea. #}
+		{{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+	</div>
+
+	{{ form_row(form.author) }}
+
+	{# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+	{{ form_widget(form.save, {'attr': {'class': 'btn-valider'}}) }}
+
+	{# Génération automatique des champs pas encore écrits. #}
+	{{ form_rest(form) }}
+
+	{# Fermeture de la balise <form> du formulaire HTML #}
+	{{ form_end(form) }}
+</div>

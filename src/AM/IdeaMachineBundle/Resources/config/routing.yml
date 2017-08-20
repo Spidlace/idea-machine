@@ -3,18 +3,20 @@ am_idea_machine_home:
     defaults: { _controller: AMIdeaMachineBundle:Idea:index }
 
 am_platform_view:
-    path:      /view/{id}
+    path:      /view/{slug}
     defaults: { _controller: AMIdeaMachineBundle:Idea:view }
-    requirements: { id: \d+ }
 
 am_platform_add:
     path:      /add
     defaults: { _controller: AMIdeaMachineBundle:Idea:add }
 
 am_platform_edit:
-    path:      /edit/{id}
+    path:      /edit/{slug}
     defaults: { _controller: AMIdeaMachineBundle:Idea:edit }
 
 am_platform_delete:
-    path:      /delete
+    path:     /delete/{slug}
     defaults: { _controller: AMIdeaMachineBundle:Idea:delete }
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"

@@ -1,0 +1,25 @@
+{# src/AM/IdeaMachineBundle/Resources/views/Idea/delete.html.twig #}
+
+{% extends "AMIdeaMachineBundle::layout.html.twig" %}
+
+{% block title %}
+  Supprimer une idée - {{ parent() }}
+{% endblock %}
+
+{% block am_idea_machine_body %}
+
+  <h2>Supprimer une annonce</h2>
+
+  <p>
+    Etes-vous certain de vouloir supprimer l'annonce "{{ idea.title }}" ?
+  </p>
+
+  <form action="{{ path('am_platform_delete', {'slug': idea.slug}) }}" method="post">
+    <a href="{{ path('am_platform_view', {'slug': idea.slug}) }}" class="btn-base">Retour à l'annonce</a>
+    <input type="submit" value="Supprimer" class="btn-suppression" />
+    {{ form_rest(form) }}
+  </form>
+
+  {{ include("AMIdeaMachineBundle:Idea:menuConnectOrAuteur.html.twig") }}
+
+{% endblock %}

@@ -1,0 +1,11 @@
+<form action="{{ path("fos_user_security_check") }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    <input type="text" id="username" name="_username" placeholder="Username" value="{{ last_username }}" />
+ 
+    <input type="password" id="password" placeholder="*******" name="_password" />
+ 
+    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+    <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+ 
+    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+</form>

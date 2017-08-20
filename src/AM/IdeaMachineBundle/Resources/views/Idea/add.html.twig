@@ -1,0 +1,13 @@
+{# src/AM/IdeaMachineBundle/Resources/views/Idea/add.html.twig #}
+
+{% extends "AMIdeaMachineBundle::layout.html.twig" %}
+
+{% block title %}Ajouter une idée - {{ parent() }}{% endblock %}
+
+{% block am_idea_machine_body %}
+    
+    {{ include("AMIdeaMachineBundle:Idea:form.html.twig") }}
+
+    {{ include("AMIdeaMachineBundle:Idea:menuConnectOrAuteur.html.twig") }}
+
+{% endblock %}
