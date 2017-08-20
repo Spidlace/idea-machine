@@ -189,4 +189,25 @@ class IdeaController extends Controller
             'form'   => $form->createView(),
         ));
     }
+
+    public function mineAction()
+    {   
+
+        // Si l'utilisateur n'a pas l'autorisation d'accéder à cette view
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_AUTEUR')) {
+            return $this->redirectToRoute('am_idea_machine_home');
+        }
+
+        // On récupère le repositery
+        $em = $this->getDoctrine()->getManager();
+        $listIdeas = $em->getRepository('AMIdeaMachineBundle:Idea')->getIdeaUser($this->getUser()->getId());
+
+        if(null === $listIdeas){
+            throw new NotFoundHttpException("Aucunes idées éxistantes.");
+        }
+
+        return $this->render('AMIdeaMachineBundle:Idea:mine.html.twig', 
+            array('listIdeas' => $listIdeas)
+        );
+    }
 }

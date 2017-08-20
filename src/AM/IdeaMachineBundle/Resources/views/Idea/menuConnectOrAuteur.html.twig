@@ -4,7 +4,7 @@
 	{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 		<ul>
 			<li><a href="{{ path('am_platform_add') }}" title="Ajouter une idée">Ajouter une idée</a></li>
-			<li><a href="#" title="Mes idées">Mes idées</a></li>
+			<li><a href="{{ path('am_platform_mine') }}" title="Mes idées">Mes idées</a></li>
 			<li><a href="{{ path('fos_user_security_logout') }}" title="Se déconnecter">Se déconnecter</a></li>
 		</ul>
 	{% else %}

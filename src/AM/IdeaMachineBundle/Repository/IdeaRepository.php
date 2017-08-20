@@ -36,4 +36,23 @@ class IdeaRepository extends \Doctrine\ORM\EntityRepository
 
 		return $query->getResult();
 	}
+
+	public function getIdeaUser($idUser)
+	{
+		$qb = $this->createQueryBuilder('a');
+
+		// On fait une jointure avec l'entité Category avec pour alias « c »
+		$qb
+		->innerJoin('a.user', 'u')
+		->addSelect('u');
+
+		// Puis on filtre sur le nom des catégories à l'aide d'un IN
+		$qb->where('u.id = :idUser');
+		$qb->setParameter('idUser', $idUser);
+
+		// Enfin, on retourne le résultat
+		return $qb
+		->getQuery()
+		->getResult();
+	}
 }
