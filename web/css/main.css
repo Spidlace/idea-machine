@@ -549,6 +549,26 @@ footer ul li a:hover {
   display: none;
 }
 
+#wrapper .container-border .formulaire-add-edit-idea .field .image-idea-form {
+  position: relative;
+  overflow: hidden;
+  width: 160px;
+  height: 160px;
+  margin: 0 0 15px;
+}
+
+#wrapper .container-border .formulaire-add-edit-idea .field .image-idea-form img {
+  position: absolute;
+  width: auto;
+  height: auto;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 160px;
+}
+
 .menu-right-co {
   position: absolute;
   top: 0;

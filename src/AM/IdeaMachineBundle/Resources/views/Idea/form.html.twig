@@ -23,6 +23,12 @@
 		{# Affichage des erreurs pour ce champ. #}
 		{{ form_errors(form.image) }}
 		
+		{% if form.image.vars.value.id is defined %}
+			<div class="image-idea-form">
+				<img src="{{ asset('uploads/img-idea') }}/{{ form.image.vars.value.id }}.{{ form.image.vars.value.url }}" alt="{{ form.image.vars.value.alt }}">
+			</div>
+		{% endif %}
+
 		{# Génération du textarea. #}
 		{{ form_widget(form.image, {'attr': {'class': 'control-control'}}) }}
 	</div>

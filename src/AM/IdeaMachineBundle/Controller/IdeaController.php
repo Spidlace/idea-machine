@@ -8,6 +8,7 @@ use AM\IdeaMachineBundle\Entity\Idea;
 use AM\IdeaMachineBundle\Entity\Image;
 use AM\UserBundle\Entity\User;
 use AM\IdeaMachineBundle\Form\IdeaType;
+use AM\IdeaMachineBundle\Form\IdeaEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -132,7 +133,7 @@ class IdeaController extends Controller
         }
 
         // On crée le Formbuilder grâce au service form factory
-        $form = $this->get('form.factory')->create(IdeaType::class, $idea);
+        $form = $this->get('form.factory')->create(IdeaEditType::class, $idea);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 

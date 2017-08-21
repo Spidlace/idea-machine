@@ -1,5 +1,7 @@
 <?php
 
+// src/AM/IdeaMachineBundle/Form/ImageType.php
+
 namespace AM\IdeaMachineBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
