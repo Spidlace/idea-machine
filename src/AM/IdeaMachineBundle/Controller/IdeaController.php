@@ -27,6 +27,10 @@ class IdeaController extends Controller
         $em = $this->getDoctrine()->getManager();
         $listIdeas = $em->getRepository('AMIdeaMachineBundle:Idea')->getIdeas();
 
+        if(null === $listIdeas){
+            throw new NotFoundHttpException("Aucunes idées éxistantes.");
+        }
+
         // On récupère l'user
         $user_id = $this->getUser();
 
@@ -50,9 +54,9 @@ class IdeaController extends Controller
 
         }
 
-        if(null === $listIdeas){
-            throw new NotFoundHttpException("Aucunes idées éxistantes.");
-        }
+        usort($arrayIdeas, function($a, $b) {
+            return $b['votes'] - $a['votes'];
+        });
 
         $count = $em->getRepository('AMIdeaMachineBundle:Idea')->getCountAjax();
 
@@ -240,6 +244,10 @@ class IdeaController extends Controller
         $em = $this->getDoctrine()->getManager();
         $listIdeas = $em->getRepository('AMIdeaMachineBundle:Idea')->getIdeaUser($this->getUser()->getId());
 
+        if(null === $listIdeas){
+            throw new NotFoundHttpException("Aucunes idées éxistantes.");
+        }
+
         $arrayIdeas = array();
         foreach ($listIdeas as $key => $idea){
             $arrayIdeas[$key]['slug'] = $idea->getSlug();
@@ -256,12 +264,11 @@ class IdeaController extends Controller
             // On détecte sur l'utilisateur à déjà voté et on l'insère dans l'array
             $alreadyVote = $em->getRepository('AMIdeaMachineBundle:Vote')->isUserAlreadyVote($this->getUser()->getId(), $idea->getId());
             $arrayIdeas[$key]['alreadyVote'] = $alreadyVote;
-
         }
 
-        if(null === $listIdeas){
-            throw new NotFoundHttpException("Aucunes idées éxistantes.");
-        }
+        usort($arrayIdeas, function($a, $b) {
+            return $b['votes'] - $a['votes'];
+        });
 
         $count = $em->getRepository('AMIdeaMachineBundle:Idea')->getCountAjax($this->getUser()->getId());
 

@@ -1,5 +1,9 @@
 # idea-machine
 
+**Version  1.1 :**
+* Trie par vote sur la home et dans la page "mes idées"
+* Changement du favicon
+
 **Version  1.0 :**
 * Ajout d'un dump de la BDD avec idées/users/images/votes par défaut
 * Corrections CSS
