@@ -1,5 +1,9 @@
 # idea-machine
 
+**Version  1.0 :**
+* Ajout d'un dump de la BDD avec idées/users/images/votes par défaut
+* Corrections CSS
+
 **Version  0.9 :**
 * Ajout du responsive de la home + loader bouton "Afficher la suite"
 

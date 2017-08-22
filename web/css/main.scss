@@ -112,9 +112,9 @@ footer ul li:first-child:before {display:none;}
 footer ul li a {display:inline-block;text-decoration:none;color:#fff;font-size:14px;vertical-align:middle;}
 footer ul li a:hover {text-decoration:underline;}
 
-// ---------------- //
-// 		HOME		//
-// ---------------- //
+// -------------------- //
+// 		HOME/MINE		//
+// -------------------- //
 .list-idea {}
 .list-idea ul {width:100%;display:flex;flex-flow:row wrap;justify-content:space-between;}
 .list-idea ul:after {content:"";flex:auto;}
@@ -122,8 +122,8 @@ footer ul li a:hover {text-decoration:underline;}
 .list-idea ul li:nth-child(3n+1) {margin-left:0}
 .list-idea ul li > a {display:block;text-decoration:none;padding:15px;border:1px solid #e6e6e6;height:100%;box-sizing:border-box;background:#fff;}
 .list-idea ul li > a .image-idea {position:relative;overflow:hidden;width:100%;height:160px;}
-.list-idea ul li > a .image-idea img {position:absolute;width:auto;height:auto;left:50%;top:50%;transform:translate(-50%,-50%);width:100%;min-height:100%;transition:transform .6s ease;}
-.list-idea ul li > a .title-idea {font-size:18px;color:#105B63;margin:25px 0;width:60%;display:inline-block;vertical-align:middle;display:block;}
+.list-idea ul li > a .image-idea img {position:absolute;width:auto;height:auto;left:50%;top:50%;transform:translate(-50%,-50%);min-width:100%;height:100%;transition:transform .6s ease;}
+.list-idea ul li > a .title-idea {font-size:18px;color:#105B63;margin:25px 0;width:70%;display:inline-block;vertical-align:middle;display:block;}
 .list-idea ul li > a .resume-idea {color:$color-text-default;font-size:14px;}
 .list-idea ul li > a .editdelete-idea {}
 .list-idea ul li > a:hover .image-idea img {transform:translate(-50%,-50%) scale(1.05);}
