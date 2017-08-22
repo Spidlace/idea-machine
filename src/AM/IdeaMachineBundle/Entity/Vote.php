@@ -14,7 +14,7 @@ class Vote
 {
 
   /**
-   * @ORM\ManyToOne(targetEntity="AM\IdeaMachineBundle\Entity\Idea", inversedBy="votes")
+   * @ORM\ManyToOne(targetEntity="AM\IdeaMachineBundle\Entity\Idea")
    * @ORM\JoinColumn(nullable=false)
    */
   private $idea;
@@ -27,14 +27,15 @@ class Vote
   private $id;
 
   /**
-   * @ORM\Column(name="author", type="string", length=255)
-   */
-  private $author;
-
-  /**
-   * @ORM\Column(name="content", type="text")
+   * @ORM\Column(name="choix", type="text")
    */
   private $choix;
+
+  /**
+   * @ORM\ManyToOne(targetEntity="AM\UserBundle\Entity\User")
+   * @ORM\JoinColumn(nullable=false)
+   */
+  private $user;
 
   /**
    * @ORM\Column(name="date", type="datetime")
@@ -52,18 +53,6 @@ class Vote
     return $this->id;
   }
 
-  public function setAuthor($author)
-  {
-    $this->author = $author;
-
-    return $this;
-  }
-
-  public function getAuthor()
-  {
-    return $this->author;
-  }
-
   public function setChoix($choix)
   {
     $this->choix = $choix;
@@ -74,6 +63,17 @@ class Vote
   public function getChoix()
   {
     return $this->choix;
+  }
+
+  public function setUser(\AM\userBundle\Entity\User $user = null)
+  {
+    $this->user = $user;
+    return $this;
+  }
+
+  public function getUser()
+  {
+    return $this->user;
   }
 
   public function setDate(\Datetime $date)

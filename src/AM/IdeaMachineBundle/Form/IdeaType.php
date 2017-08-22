@@ -44,6 +44,4 @@ class IdeaType extends AbstractType
     {
         return 'am_ideamachinebundle_idea';
     }
-
-
 }

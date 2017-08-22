@@ -4,7 +4,7 @@ jQuery(function($){
 
 	    page_data = parseInt($(this).attr('data-page'));
 	    page_max_data = parseInt($(this).attr('data-page-max'));
-	    $als = $(".list-idea a.afficher-la-suite");
+	    $als = $(this);
 
 	    if(page_data > 0){
 	    	var data_page = { page : page_data, page_max : page_max_data, user_id : id_user };

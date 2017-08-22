@@ -5,6 +5,14 @@
 
 {% block title %}{{ idea.title }} - {{ parent() }}{% endblock %}
 
+{% block javascripts_var %}
+var am_platform_add_vote = "{{ path('am_platform_add_vote') }}";
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('js/min/ajax-voteIdea.min.js') }}" type="text/javascript"></script>
+{% endblock %}
+
 {% block am_idea_machine_body %}
     
     <div class="item-idea">
@@ -17,11 +25,17 @@
         <div class="top-publication">
     	   <h2>{{ idea.title }}</h2>
             <div class="vote-idea">
-                {#% if not advert.categories.empty %#}
-                    {#% for category in advert.categories %#}
-                    {#% endfor %#}
-                {#% endif %#}
-                Il y a {{ nbrVotes }} votes
+                <span class="nbr-votes"><strong>{{ nbrVotes }}</strong> votes</span>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and alreadyVote != 1 %}
+                    <div class="choix-vote" data-item-id="{{ idea.id }}">
+                        <button class="plusun" title="+1">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="18.3px" height="10.2px" viewBox="0 0 18.3 10.2" style="overflow:scroll;enable-background:new 0 0 18.3 10.2;" xml:space="preserve"><polygon points="18.3,7.9 16.3,10.2 9.2,4.1 2,10.2 0,7.9 9.2,0 "></polygon></svg>
+                        </button>
+                        <button class="moinsun" title="-1">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="18.3px" height="10.2px" viewBox="0 0 18.3 10.2" style="overflow:scroll;enable-background:new 0 0 18.3 10.2;" xml:space="preserve"><polygon points="0,2.3 2,0 9.2,6.2 16.3,0 18.3,2.3 9.2,10.2 "></polygon></svg>
+                        </button>
+                    </div>
+                {% endif %}
             </div>
         </div>
         <div class="content">

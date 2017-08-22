@@ -15,7 +15,8 @@
     "run-sequence": "latest",
     "gulp-livereload": "latest",
     "gulp-cssbeautify": "latest",
-    "gulp-autoprefixer": "latest"
+    "gulp-autoprefixer": "latest",
+    "gulp-uglify": "latest"
   },
   "author": "Anthony Martin",
   "license": "ISC"

@@ -14,5 +14,25 @@ use Doctrine\ORM\EntityRepository;
  */
 class VoteRepository extends \Doctrine\ORM\EntityRepository
 {
-	
+	public function getCountVoteIdea($id_idea){
+		$listVotes = $this->findBy(array('idea' => $id_idea));
+
+		$nbrTotalVotes = 0;
+		foreach ($listVotes as $vote){
+		 	$choix = intval($vote->getChoix());
+            $nbrTotalVotes = $nbrTotalVotes + $choix;
+		}
+
+		return $nbrTotalVotes;
+	}
+
+	public function isUserAlreadyVote($id_user, $id_idea){
+		$count = $this->createQueryBuilder('v')->where('v.user = '.$id_user)->andWhere('v.idea = '.$id_idea)->select('COUNT(v)')->getQuery()->getSingleScalarResult();
+
+		if($count >= 1){
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

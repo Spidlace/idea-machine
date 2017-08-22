@@ -6,9 +6,12 @@ namespace AM\IdeaMachineBundle\Controller;
 
 use AM\IdeaMachineBundle\Entity\Idea;
 use AM\IdeaMachineBundle\Entity\Image;
+use AM\IdeaMachineBundle\Entity\Vote;
 use AM\UserBundle\Entity\User;
+
 use AM\IdeaMachineBundle\Form\IdeaType;
 use AM\IdeaMachineBundle\Form\IdeaEditType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,6 +27,29 @@ class IdeaController extends Controller
         $em = $this->getDoctrine()->getManager();
         $listIdeas = $em->getRepository('AMIdeaMachineBundle:Idea')->getIdeas();
 
+        // On récupère l'user
+        $user_id = $this->getUser();
+
+        $arrayIdeas = array();
+        foreach ($listIdeas as $key => $idea){
+            $arrayIdeas[$key]['slug'] = $idea->getSlug();
+            $arrayIdeas[$key]['image'] = $idea->getImage();
+            $arrayIdeas[$key]['id'] = $idea->getId();
+            $arrayIdeas[$key]['title'] = $idea->getTitle();
+            $arrayIdeas[$key]['content'] = $idea->getContent();
+            $arrayIdeas[$key]['user'] = $idea->getUser();
+    
+            // On importe dans l'array le total des votes
+            $countTotalVote = $em->getRepository('AMIdeaMachineBundle:Vote')->getCountVoteIdea($idea->getId());
+            $arrayIdeas[$key]['votes'] = $countTotalVote;
+    
+            // On détecte sur l'utilisateur à déjà voté et on l'insère dans l'array
+            if(!empty($user_id)) $alreadyVote = $em->getRepository('AMIdeaMachineBundle:Vote')->isUserAlreadyVote($this->getUser()->getId(), $idea->getId());
+            else $alreadyVote = 1;
+            $arrayIdeas[$key]['alreadyVote'] = $alreadyVote;
+
+        }
+
         if(null === $listIdeas){
             throw new NotFoundHttpException("Aucunes idées éxistantes.");
         }
@@ -31,7 +57,7 @@ class IdeaController extends Controller
         $count = $em->getRepository('AMIdeaMachineBundle:Idea')->getCountAjax();
 
         return $this->render('AMIdeaMachineBundle:Idea:index.html.twig', 
-            array('listIdeas' => $listIdeas, 'count' => $count)
+            array('listIdeas' => $arrayIdeas, 'count' => $count)
         );
     }
 
@@ -62,10 +88,18 @@ class IdeaController extends Controller
             }
         }
 
+        $user_id = $this->getUser();
+        if(!empty($user_id)){
+            $alreadyVote = $em->getRepository('AMIdeaMachineBundle:Vote')->isUserAlreadyVote($this->getUser()->getId(), $idea->getID());
+        } else {
+            $alreadyVote = 1;
+        }
+
         return $this->render('AMIdeaMachineBundle:Idea:view.html.twig', 
             array(
                 'idea'  => $idea,
-                'nbrVotes'  => $nbrTotalVotes
+                'nbrVotes'  => $nbrTotalVotes,
+                'alreadyVote' => $alreadyVote
             )
         );
     }
@@ -179,10 +213,11 @@ class IdeaController extends Controller
         $form = $this->get('form.factory')->create();
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-          $em->remove($idea);
-          $em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($idea);
+            $em->flush();
 
-          $request->getSession()->getFlashBag()->add('info', "L'idée a bien été supprimée.");
+            $request->getSession()->getFlashBag()->add('info', "L'idée a bien été supprimée.");
             return $this->redirectToRoute('am_idea_machine_home');
         }
 
@@ -205,6 +240,25 @@ class IdeaController extends Controller
         $em = $this->getDoctrine()->getManager();
         $listIdeas = $em->getRepository('AMIdeaMachineBundle:Idea')->getIdeaUser($this->getUser()->getId());
 
+        $arrayIdeas = array();
+        foreach ($listIdeas as $key => $idea){
+            $arrayIdeas[$key]['slug'] = $idea->getSlug();
+            $arrayIdeas[$key]['image'] = $idea->getImage();
+            $arrayIdeas[$key]['id'] = $idea->getId();
+            $arrayIdeas[$key]['title'] = $idea->getTitle();
+            $arrayIdeas[$key]['content'] = $idea->getContent();
+            $arrayIdeas[$key]['user'] = $idea->getUser();
+    
+            // On importe dans l'array le total des votes
+            $countTotalVote = $em->getRepository('AMIdeaMachineBundle:Vote')->getCountVoteIdea($idea->getId());
+            $arrayIdeas[$key]['votes'] = $countTotalVote;
+    
+            // On détecte sur l'utilisateur à déjà voté et on l'insère dans l'array
+            $alreadyVote = $em->getRepository('AMIdeaMachineBundle:Vote')->isUserAlreadyVote($this->getUser()->getId(), $idea->getId());
+            $arrayIdeas[$key]['alreadyVote'] = $alreadyVote;
+
+        }
+
         if(null === $listIdeas){
             throw new NotFoundHttpException("Aucunes idées éxistantes.");
         }
@@ -212,13 +266,13 @@ class IdeaController extends Controller
         $count = $em->getRepository('AMIdeaMachineBundle:Idea')->getCountAjax($this->getUser()->getId());
 
         return $this->render('AMIdeaMachineBundle:Idea:mine.html.twig', 
-            array('listIdeas' => $listIdeas, 'count' => $count)
+            array('listIdeas' => $arrayIdeas, 'count' => $count)
         );
     }
 
     public function getOtherIdeaAction(Request $request)
     {   
-
+        // Si la requète provient de la requète AJAX
         if($request->isXmlHttpRequest())
         {
             $page = $request->request->get('page');
@@ -229,14 +283,70 @@ class IdeaController extends Controller
             if(isset($page) && $page <= $page_max){
                 $offset = $page*6;
 
+                // On récupère l'user
+                $user_o = $this->getUser();
+
                 $em = $this->getDoctrine()->getManager();
                 $listIdeas = $em->getRepository('AMIdeaMachineBundle:Idea')->getOtherIdea($offset, $user_id);
 
+                $arrayIdeas = array();
+                foreach ($listIdeas as $key => $idea){
+                    $arrayIdeas[$key]['slug'] = $idea->getSlug();
+                    $arrayIdeas[$key]['image'] = $idea->getImage();
+                    $arrayIdeas[$key]['id'] = $idea->getId();
+                    $arrayIdeas[$key]['title'] = $idea->getTitle();
+                    $arrayIdeas[$key]['content'] = $idea->getContent();
+                    $arrayIdeas[$key]['user'] = $idea->getUser();
+            
+                    // On importe dans l'array le total des votes
+                    $countTotalVote = $em->getRepository('AMIdeaMachineBundle:Vote')->getCountVoteIdea($idea->getId());
+                    $arrayIdeas[$key]['votes'] = $countTotalVote;
+            
+                    // On détecte sur l'utilisateur à déjà voté et on l'insère dans l'array
+                    if(!empty($user_o)) $alreadyVote = $em->getRepository('AMIdeaMachineBundle:Vote')->isUserAlreadyVote($user_o->getId(), $idea->getId());
+                    else $alreadyVote = 1;
+                    $arrayIdeas[$key]['alreadyVote'] = $alreadyVote;
+                }
+
                 return $this->render('AMIdeaMachineBundle:Idea:listIdeas-li.html.twig', 
-                    array('listIdeas' => $listIdeas)
+                    array('listIdeas' => $arrayIdeas)
                 );
             }
         }
         throw new NotFoundHttpException("Aucunes idées éxistantes.");
+    }
+
+    public function addVoteIdeaAction(Request $request)
+    {   
+        // Si la requète provient de la requète AJAX
+        if($request->isXmlHttpRequest())
+        {
+            $vote_user = $request->request->get('vote');
+            $item_id = $request->request->get('item_id');
+
+            if((isset($vote_user) && ($vote_user == 1 || $vote_user == -1)) && (isset($item_id) && !empty($item_id))){
+
+                $em = $this->getDoctrine()->getManager();
+                $repository = $em->getRepository('AMIdeaMachineBundle:Idea');
+                $idea = $repository->findOneBy(array('id' => $item_id));
+
+                // Création de l'entité
+                $vote = new Vote();
+                $vote->setIdea($idea);
+                $vote->setChoix($vote_user);
+                $vote->setUser($this->getUser());
+
+                // On récupère l'EntityManager
+                $em->persist($vote);
+                $em->flush();
+
+                $countTotalVote = $em->getRepository('AMIdeaMachineBundle:Vote')->getCountVoteIdea($idea->getId());
+
+                return $this->render('AMIdeaMachineBundle:Vote:index.html.twig',
+                    array('count_total' => $countTotalVote)
+                );
+            }
+        }
+        throw new NotFoundHttpException("Aucun vote d'indiqué.");
     }
 }

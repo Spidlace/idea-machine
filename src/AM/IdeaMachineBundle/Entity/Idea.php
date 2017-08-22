@@ -39,7 +39,7 @@ class Idea
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
-     * @Assert\Length(min=5, minMessage="Le titre doit faire au moins {{ limit }} caractères.")
+     * @Assert\NotBlank()
      */
     private $title;
 
@@ -47,7 +47,6 @@ class Idea
      * @var string
      *
      * @ORM\Column(name="content", type="text")
-     * @Antiflood()
      * @Assert\NotBlank()
      */
     private $content;
@@ -59,7 +58,7 @@ class Idea
     private $image;
 
     /**
-     * @ORM\OneToMany(targetEntity="AM\IdeaMachineBundle\Entity\Vote", mappedBy="idea")
+     * @ORM\OneToMany(targetEntity="AM\IdeaMachineBundle\Entity\Vote", mappedBy="idea", cascade={"remove"})
     */
     private $votes; // Notez le « s », une annonce est liée à plusieurs candidatures
 

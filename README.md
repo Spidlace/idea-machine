@@ -1,5 +1,9 @@
 # idea-machine
 
+**Version  0.8 :**
+* Modification du gulpfile.js pour ajouter la minification des fichiers JS (et le rename) + modification des repertoires JS/CSS
+* Ajout du vote en AJAX et modification de l'AJAX pour le "Load More" + Correction d'une erreur sur la méthode deleteAction dans le controller (IdeaController)
+
 **Version  0.7 :**
 * Ajout de la prévisualisation de l'image dans la view form (pour la page d'édition) + rendre non obligatoire l'image (uniquement pour l'édition)
 

@@ -26,5 +26,9 @@ am_platform_get_other_idea:
     path:     /idea/other-idea
     defaults: { _controller: AMIdeaMachineBundle:Idea:getOtherIdea }
 
+am_platform_add_vote:
+    path:     /idea/add-vote
+    defaults: { _controller: AMIdeaMachineBundle:Idea:addVoteIdea }
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
