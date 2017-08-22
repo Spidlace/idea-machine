@@ -1,5 +1,8 @@
 # idea-machine
 
+**Version  0.9 :**
+* Ajout du responsive de la home + loader bouton "Afficher la suite"
+
 **Version  0.8 :**
 * Modification du gulpfile.js pour ajouter la minification des fichiers JS (et le rename) + modification des repertoires JS/CSS
 * Ajout du vote en AJAX et modification de l'AJAX pour le "Load More" + Correction d'une erreur sur la méthode deleteAction dans le controller (IdeaController)

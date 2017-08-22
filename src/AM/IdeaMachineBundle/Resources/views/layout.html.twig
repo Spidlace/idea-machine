@@ -8,7 +8,15 @@
 
 {% block body %}
 
-  {% block am_idea_machine_body %}
-  {% endblock %}
+	<div id="wrapper">
+        <div class="wrap">
+            {{ include("AMIdeaMachineBundle:Idea:menuConnectOrAuteur.html.twig") }}
+            <div class="container-border">
+                {% block am_idea_machine_body %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
 
 {% endblock %}

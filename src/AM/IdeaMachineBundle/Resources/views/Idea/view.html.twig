@@ -25,7 +25,7 @@ var am_platform_add_vote = "{{ path('am_platform_add_vote') }}";
         <div class="top-publication">
     	   <h2>{{ idea.title }}</h2>
             <div class="vote-idea">
-                <span class="nbr-votes"><strong>{{ nbrVotes }}</strong> votes</span>
+                <span class="nbr-votes"><strong>{{ nbrVotes }}</strong></span>
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and alreadyVote != 1 %}
                     <div class="choix-vote" data-item-id="{{ idea.id }}">
                         <button class="plusun" title="+1">
@@ -54,7 +54,5 @@ var am_platform_add_vote = "{{ path('am_platform_add_vote') }}";
             </div>
         {% endif %}
     </div>
-
-    {{ include("AMIdeaMachineBundle:Idea:menuConnectOrAuteur.html.twig") }}
 
 {% endblock %}

@@ -7,7 +7,7 @@
                 </div>
             {% endif %}
             <span class="title-idea">{{ idea.title|truncate(20, false, '...') }}</span>
-            <span class="resume-idea">{{ idea.content|truncate(100, false, '...') }}</span>
+            <span class="resume-idea">{{ idea.content|truncate(80, false, '...') }}</span>
         </a>
         {% if app.user is not null and app.user.username == idea.user.username %}
             <div class="editdelete-idea">
@@ -16,7 +16,7 @@
             </div>
         {% endif %}
         <div class="vote-idea">
-            <span class="nbr-votes"><strong>{{ idea.votes }}</strong> votes</span>
+            <span class="nbr-votes"><strong>{{ idea.votes }}</strong></span>
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and idea.alreadyVote != 1 %}
                 <div class="choix-vote" data-item-id="{{ idea.id }}">
                     <button class="plusun" title="+1">
